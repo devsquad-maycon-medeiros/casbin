@@ -11,7 +11,15 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::view('/dashboard','dashboard')->name('dashboard');
 
-    Route::middleware(['enforcer:section,read'])->get('sections', Sections\Index::class);
+    Route::prefix('sections')->name('sections.')->group(function () {
+        Route::middleware(['enforcer:section,read'])->get('', Sections\Index::class)->name('index');
+        Route::middleware(['enforcer:section,create'])->get('create', Sections\Form::class)->name('create');
+        Route::middleware(['enforcer:section,update'])->get('{section}/edit', Sections\Form::class)->name('edit');
+    });
 
-    Route::get('articles', Articles\Index::class);
+    Route::prefix('articles')->name('articles.')->group(function () {
+        Route::get('', Articles\Index::class)->name('index');
+        Route::middleware(['enforcer:article,create'])->get('create', Articles\Form::class)->name('create');
+        Route::middleware(['enforcer:article,update'])->get('{article}/edit', Articles\Form::class)->name('edit');
+    });
 });

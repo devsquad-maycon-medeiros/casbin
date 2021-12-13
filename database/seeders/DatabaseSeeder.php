@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PolicySeeder::class,
             UserSeeder::class,
+            SectionSeeder::class,
+            ArticleSeeder::class,
         ]);
     }
 }
