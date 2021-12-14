@@ -3,29 +3,24 @@
 namespace App\Http\Livewire\Articles;
 
 use App\Models\Article;
-use Illuminate\Support\Facades\Auth;
-use Lauthz\Facades\Enforcer;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
 class Index extends Component
 {
+    use AuthorizesRequests;
+
     public function render()
     {
-        if (Enforcer::enforce((string)Auth::id(), "article", "read")) {
-            return view('livewire.articles.index', [
-                'articles' => Article::paginate(10),
-            ]);
-        }
-
-        return abort(403);
+        return view('livewire.articles.index', [
+            'articles' => Article::paginate(10),
+        ]);
     }
 
     public function remove(Article $article)
     {
-        if (Enforcer::enforce((string)Auth::id(), "article", "delete")) {
-            return $article->delete();
-        }
+        $this->authorize('delete', $article);
 
-        return abort(403);
+        $article->delete();
     }
 }

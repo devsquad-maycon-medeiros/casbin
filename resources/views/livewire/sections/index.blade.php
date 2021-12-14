@@ -46,9 +46,15 @@
                                                     {{ $section->updated_at->diffForHumans() }}
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                    <a href="{{ route('sections.edit', $section) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                                    -
-                                                    <a href="#" wire:click="remove({{ $section }})" class="text-indigo-600 hover:text-indigo-900">Remove</a>
+                                                    <div class="flex divide-x-2">
+                                                        @permissions('section:update')
+                                                            <a href="{{ route('sections.edit', $section) }}" class="text-indigo-600 hover:text-indigo-900 p-2">Edit</a>
+                                                        @endpermissions
+
+                                                        @permissions('section:delete')
+                                                            <a href="#" wire:click="remove({{ $section }})" class="text-indigo-600 hover:text-indigo-900 p-2">Remove</a>
+                                                        @endpermissions
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endforeach

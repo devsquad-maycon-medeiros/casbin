@@ -16,17 +16,27 @@
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
 
-                    @enforce('article:read')
+                    @permissions('article:read')
                         <x-jet-nav-link href="{{ route('articles.index') }}" :active="request()->routeIs('articles.*')">
                             {{ __('Articles') }}
                         </x-jet-nav-link>
-                    @endenforce
+                    @endpermissions
                     
-                    @enforce('section:read')
+                    @permissions('section:read')
                         <x-jet-nav-link href="{{ route('sections.index') }}" :active="request()->routeIs('sections.*')">
                             {{ __('Sections') }}
                         </x-jet-nav-link>
-                    @endenforce
+                    @endpermissions
+
+                    @roles('super-admin')
+                        <x-jet-nav-link href="#">
+                            {{ __('Roles') }}
+                        </x-jet-nav-link>
+
+                        <x-jet-nav-link href="#">
+                            {{ __('Permissions') }}
+                        </x-jet-nav-link>
+                    @endroles
                 </div>
             </div>
 
@@ -154,17 +164,17 @@
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
             
-            @enforce('article:read')
+            @permissions('article:read')
                 <x-jet-responsive-nav-link href="{{ route('articles.index') }}" :active="request()->routeIs('articles.*')">
                     {{ __('Articles') }}
                 </x-jet-responsive-nav-link>
-            @endenforce
+            @endpermissions
 
-            @enforce('section:read')
+            @permissions('section:read')
                 <x-jet-responsive-nav-link href="{{ route('sections.index') }}" :active="request()->routeIs('sections.*')">
                     {{ __('Sections') }}
                 </x-jet-responsive-nav-link>
-            @endenforce
+            @endpermissions
         </div>
 
         <!-- Responsive Settings Options -->

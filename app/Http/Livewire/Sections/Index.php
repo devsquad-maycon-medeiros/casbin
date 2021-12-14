@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Sections;
 
 use App\Models\Section;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 use Lauthz\Facades\Enforcer;
 use Livewire\Component;
@@ -11,6 +12,7 @@ use Livewire\WithPagination;
 class Index extends Component
 {
     use WithPagination;
+    use AuthorizesRequests;
 
     public function render()
     {
@@ -21,10 +23,8 @@ class Index extends Component
 
     public function remove(Section $section)
     {
-        if (Enforcer::enforce((string)Auth::id(), "section", "delete")) {
-            return $section->delete();
-        }
+        $this->authorize('delete', $section);
 
-        return abort(403);
+        $section->delete();
     }
 }
