@@ -23,7 +23,7 @@ class Index extends Component
 
     public function remove(Section $section)
     {
-        $this->authorize('delete', $section);
+        $this->authorize('delete sections', $section);
 
         $section->delete();
     }
