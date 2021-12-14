@@ -46,7 +46,5 @@ class AppServiceProvider extends ServiceProvider
                 ->filter()
                 ->isNotEmpty();
         });
-
-        Blade::directive('endenforce', fn () => "<?php endif; ?>");
     }
 }
