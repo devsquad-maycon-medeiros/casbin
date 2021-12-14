@@ -22,6 +22,10 @@ class Index extends Component
 
     public function remove(Article $article)
     {
-        $article->delete();
+        if (Enforcer::enforce((string)Auth::id(), "article", "delete")) {
+            return $article->delete();
+        }
+
+        return abort(403);
     }
 }
