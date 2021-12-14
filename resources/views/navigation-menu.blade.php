@@ -15,12 +15,18 @@
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('sections.index') }}" :active="request()->routeIs('sections.*')">
-                        {{ __('Sections') }}
-                    </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('articles.index') }}" :active="request()->routeIs('articles.*')">
-                        {{ __('Articles') }}
-                    </x-jet-nav-link>
+
+                    @enforce('article:read')
+                        <x-jet-nav-link href="{{ route('articles.index') }}" :active="request()->routeIs('articles.*')">
+                            {{ __('Articles') }}
+                        </x-jet-nav-link>
+                    @endenforce
+                    
+                    @enforce('section:read')
+                        <x-jet-nav-link href="{{ route('sections.index') }}" :active="request()->routeIs('sections.*')">
+                            {{ __('Sections') }}
+                        </x-jet-nav-link>
+                    @endenforce
                 </div>
             </div>
 
@@ -147,6 +153,18 @@
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
+            
+            @enforce('article:read')
+                <x-jet-responsive-nav-link href="{{ route('articles.index') }}" :active="request()->routeIs('articles.*')">
+                    {{ __('Articles') }}
+                </x-jet-responsive-nav-link>
+            @endenforce
+
+            @enforce('section:read')
+                <x-jet-responsive-nav-link href="{{ route('sections.index') }}" :active="request()->routeIs('sections.*')">
+                    {{ __('Sections') }}
+                </x-jet-responsive-nav-link>
+            @endenforce
         </div>
 
         <!-- Responsive Settings Options -->
