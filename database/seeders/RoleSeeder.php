@@ -22,15 +22,17 @@ class RoleSeeder extends Seeder
         ])->map(fn ($role) => Role::findOrCreate($role))
             ->filter(fn ($role) => $role->name !== 'Super Admin');
 
-        $articlePermissions = Permission::where('name', 'like', '%articles')->get();
+        $articlePermissions = Permission::where('name', 'like', '%articles')->get()
+            ->map->name;
 
         $writerRole = $roles->first(fn ($role) => $role->name === 'Writer');
 
-        $writerRole->givePermissionTo(...$articlePermissions->map->name);
+        $writerRole->givePermissionTo(...$articlePermissions);
 
-        $sectionPermissions = Permission::where('name', 'like', '%sections')->get();
+        $sectionPermissions = Permission::where('name', 'like', '%sections')->get()
+            ->map->name;
 
         $roles->first(fn ($role) => $role->name === 'Admin')
-            ->givePermissionTo(...$sectionPermissions->map->name);
+            ->givePermissionTo(...$sectionPermissions, ...$articlePermissions);
     }
 }

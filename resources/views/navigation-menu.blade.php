@@ -29,7 +29,7 @@
                     @endcan
 
                     @role('Super Admin')
-                        <x-jet-nav-link href="#">
+                        <x-jet-nav-link href="{{ route('roles-and-permissions.index') }}" :active="request()->routeIs('roles-and-permissions.*')">
                             {{ __('Roles & Permissions') }}
                         </x-jet-nav-link>
                     @endrole
@@ -173,7 +173,7 @@
             @endcan
 
             @role('Super Admin')
-                <x-jet-responsive-nav-link href="#">
+                <x-jet-responsive-nav-link href="{{ route('roles-and-permissions.index') }}" :active="request()->routeIs('roles-and-permissions.*')">
                     {{ __('Roles & Permissions') }}
                 </x-jet-responsive-nav-link>
             @endrole
