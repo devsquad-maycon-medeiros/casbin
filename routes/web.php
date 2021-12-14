@@ -16,7 +16,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     });
 
     Route::prefix('articles')->name('articles.')->group(function () {
-        Route::get('', Articles\Index::class)->name('index');
+        Route::get('/', Articles\Index::class)->name('index');
         Route::middleware(['enforcer:article,create'])->get('create', Articles\Form::class)->name('create');
         Route::middleware(['enforcer:article,update'])->get('{article}/edit', Articles\Form::class)->name('edit');
     });

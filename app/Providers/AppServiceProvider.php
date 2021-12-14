@@ -26,10 +26,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Blade::if('enforce', function ($args) {
+        Blade::if('roles', function ($roles) {
             $identifier = auth()->user()->getAuthIdentifier();
 
-            //dd(Enforcer::hasPermissionForUser($identifier, 'article', 'read'));
+            return Str::of($roles)->replace("'", "")->explode(',')
+                ->map(fn (string $role) => in_array($role, Enforcer::getRolesForUser($identifier)))
+                ->filter()
+                ->isNotEmpty();
+        });
+
+        Blade::if('permissions', function ($args) {
+            $identifier = auth()->user()->getAuthIdentifier();
+
             return Str::of($args)->replace("'", "")->explode('|')
                 ->map(function (string $expression) use ($identifier) {
                     [$subject, $permissions] = explode(':', $expression);
@@ -39,7 +47,7 @@ class AppServiceProvider extends ServiceProvider
                             strVal($identifier),
                             $subject,
                             trim($permission)
-                        ))
+                        ) || in_array('super-admin', Enforcer::getRolesForUser($identifier)))
                         ->filter()
                         ->isNotEmpty();
                 })
