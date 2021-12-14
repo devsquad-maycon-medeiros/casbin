@@ -58,5 +58,8 @@
                 </div>
             </div>
         </div>
+        <div class="mt-5">
+            {{ $articles->links() }}
+        </div>
     </div>
 </div>

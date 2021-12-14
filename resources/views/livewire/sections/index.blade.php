@@ -57,6 +57,9 @@
                     </div>
                 </div>
             </div>
+            <div class="mt-5">
+                {{ $sections->links() }}
+            </div>
         </div>
     </div>
 </div>
