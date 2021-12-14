@@ -1,11 +1,13 @@
 <div>
     <x-slot name="header">
-        <h2 class="inline-flex font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Article') }}
-        </h2>
-        <a href="{{ route('articles.create') }}" type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-            Create
-        </a>
+        <div class="flex items-center justify-between">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Articles') }}
+            </h2>
+            <a class="px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('articles.create') }}">
+                Create
+            </a>
+        </div>
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
