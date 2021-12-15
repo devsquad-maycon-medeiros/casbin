@@ -31,10 +31,12 @@ class DataTable extends LivewireDatatable
 
             Column::name('name')
                 ->editable()
-                ->label('Name'),
+                ->label('Name')
+                ->filterable(),
 
             Column::name('email')
-                ->label('Email'),
+                ->label('Email')
+                ->filterable(),
 
             Column::name('roles.name')->label('Roles')
                 ->filterable()

@@ -167,6 +167,7 @@ return [
          */
 
         Spatie\Permission\PermissionServiceProvider::class,
+        App\Providers\TenancyServiceProvider::class,
 
         /*
          * Application Service Providers...

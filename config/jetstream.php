@@ -28,7 +28,10 @@ return [
      |
      */
 
-    'middleware' => ['web'],
+    'middleware' => [
+        'web',
+        InitializeTenancyByDomain::class,
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -45,7 +48,7 @@ return [
         // Features::termsAndPrivacyPolicy(),
         // Features::profilePhotos(),
         // Features::api(),
-//        Features::teams(['invitations' => true]),
+        //        Features::teams(['invitations' => true]),
         Features::accountDeletion(),
     ],
 

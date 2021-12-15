@@ -4,9 +4,12 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Sections') }}
             </h2>
-            <a class="px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('sections.create') }}">
-                Create
-            </a>
+            @can('create sections')
+                <a class="px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    href="{{ route('sections.create') }}">
+                    Create
+                </a>
+            @endcan
         </div>
     </x-slot>
     <div class="py-12">
@@ -18,25 +21,29 @@
                             <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                                 <table class="min-w-full divide-y divide-gray-200">
                                     <thead class="bg-gray-50">
-                                    <tr>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Name
-                                        </th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Created At
-                                        </th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Updated At
-                                        </th>
-                                        <th scope="col" class="relative px-6 py-3">
-                                            <span class="sr-only">Edit</span>
-                                        </th>
-                                    </tr>
+                                        <tr>
+                                            <th scope="col"
+                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Name
+                                            </th>
+                                            <th scope="col"
+                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Created At
+                                            </th>
+                                            <th scope="col"
+                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Updated At
+                                            </th>
+                                            <th scope="col" class="relative px-6 py-3">
+                                                <span class="sr-only">Edit</span>
+                                            </th>
+                                        </tr>
                                     </thead>
                                     <tbody class="bg-white divide-y divide-gray-200">
-                                        @foreach($sections as $section)
+                                        @foreach ($sections as $section)
                                             <tr>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                <td
+                                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                                     {{ $section->name }}
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -47,12 +54,14 @@
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                     <div class="flex divide-x-2">
-                                                        @can('update sectiona')
-                                                            <a href="{{ route('sections.edit', $section) }}" class="text-indigo-600 hover:text-indigo-900 p-2">Edit</a>
+                                                        @can('update sections')
+                                                            <a href="{{ route('sections.edit', $section) }}"
+                                                                class="text-indigo-600 hover:text-indigo-900 p-2">Edit</a>
                                                         @endcan
 
-                                                        @can('delete sectiona')
-                                                            <a href="#" wire:click="remove({{ $section }})" class="text-indigo-600 hover:text-indigo-900 p-2">Remove</a>
+                                                        @can('delete sections')
+                                                            <a href="#" wire:click="remove({{ $section }})"
+                                                                class="text-indigo-600 hover:text-indigo-900 p-2">Remove</a>
                                                         @endcan
                                                     </div>
                                                 </td>
