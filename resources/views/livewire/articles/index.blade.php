@@ -4,9 +4,12 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Articles') }}
             </h2>
-            <a class="px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('articles.create') }}">
-                Create
-            </a>
+            @can('create articles')
+                <a class="px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    href="{{ route('articles.create') }}">
+                    Create
+                </a>
+            @endcan
         </div>
     </x-slot>
     <div class="py-12">
@@ -18,25 +21,29 @@
                             <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                                 <table class="min-w-full divide-y divide-gray-200">
                                     <thead class="bg-gray-50">
-                                    <tr>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Name
-                                        </th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Created At
-                                        </th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Updated At
-                                        </th>
-                                        <th scope="col" class="relative px-6 py-3">
-                                            <span class="sr-only">Edit</span>
-                                        </th>
-                                    </tr>
+                                        <tr>
+                                            <th scope="col"
+                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Name
+                                            </th>
+                                            <th scope="col"
+                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Created At
+                                            </th>
+                                            <th scope="col"
+                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Updated At
+                                            </th>
+                                            <th scope="col" class="relative px-6 py-3">
+                                                <span class="sr-only">Edit</span>
+                                            </th>
+                                        </tr>
                                     </thead>
                                     <tbody class="bg-white divide-y divide-gray-200">
-                                        @foreach($articles as $article)
+                                        @foreach ($articles as $article)
                                             <tr>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" title="{{ $article->name }}">
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
+                                                    title="{{ $article->name }}">
                                                     {{ Str::limit($article->name, 75) }}
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -48,11 +55,13 @@
                                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                     <div class="divide-x-2 flex">
                                                         @can('update articles')
-                                                        <a href="{{ route('articles.edit', $article) }}" class="text-indigo-600 hover:text-indigo-900 p-2">Edit</a>
+                                                            <a href="{{ route('articles.edit', $article) }}"
+                                                                class="text-indigo-600 hover:text-indigo-900 p-2">Edit</a>
                                                         @endcan
 
                                                         @can('delete articles')
-                                                            <a href="#" wire:click="remove({{ $article }})" class="text-indigo-600 hover:text-indigo-900 p-2">Remove</a>
+                                                            <a href="#" wire:click="remove({{ $article }})"
+                                                                class="text-indigo-600 hover:text-indigo-900 p-2">Remove</a>
                                                         @endcan
                                                     </div>
                                                 </td>

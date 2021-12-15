@@ -2,6 +2,7 @@
 
 use App\Providers\RouteServiceProvider;
 use Laravel\Fortify\Features;
+use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 
 return [
 
@@ -89,7 +90,10 @@ return [
     |
     */
 
-    'middleware' => ['web'],
+    'middleware' => [
+        'web',
+        InitializeTenancyByDomain::class,
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -133,13 +137,13 @@ return [
 
     'features' => [
         Features::registration(),
-        Features::resetPasswords(),
+        //Features::resetPasswords(),
         // Features::emailVerification(),
-        Features::updateProfileInformation(),
-        Features::updatePasswords(),
-        Features::twoFactorAuthentication([
-            'confirmPassword' => true,
-        ]),
+        //Features::updateProfileInformation(),
+        //eatures::updatePasswords(),
+        // Features::twoFactorAuthentication([
+        //     'confirmPassword' => true,
+        // ]),
     ],
 
 ];
