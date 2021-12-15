@@ -29,6 +29,6 @@ class UserSeeder extends Seeder
 
         $writer->assignRole('Writer');
 
-        User::factory()->create(['email' => 'user@devsquad.com']);
+        User::factory()->count(100)->create();
     }
 }
