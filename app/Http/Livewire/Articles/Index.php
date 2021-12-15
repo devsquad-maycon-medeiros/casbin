@@ -19,7 +19,7 @@ class Index extends Component
 
     public function remove(Article $article)
     {
-        $this->authorize('delete', $article);
+        $this->authorize('delete articles', $article);
 
         $article->delete();
     }
