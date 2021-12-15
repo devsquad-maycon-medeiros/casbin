@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Lauthz\Facades\Enforcer;
 
 class UserSeeder extends Seeder
 {
@@ -17,20 +16,18 @@ class UserSeeder extends Seeder
     {
         $superAdmin = User::factory()->create(['email' => 'super-admin@devsquad.com']);
 
-        Enforcer::addRoleForUser($superAdmin->id, 'super-admin');
+        $superAdmin->assignRole('Super Admin');
 
-        $administrator = User::factory()->create(['email' => 'team@devsquad.com']);
+        $admin = User::factory()->create(['email' => 'team@devsquad.com']);
 
-        Enforcer::addRoleForUser($administrator->id, 'administrator');
+        $admin->assignRole('Admin');
 
-        $editor = User::factory()->create([
-            'email' => 'editor@devsquad.com',
-            'current_team_id' => $administrator->current_team_id
+        $writer = User::factory()->create([
+            'email' => 'writer@devsquad.com',
+            'current_team_id' => $admin->current_team_id
         ]);
 
-        Enforcer::addRoleForUser($editor->id, 'editor');
-
-        Enforcer::addPermissionForUser($editor->id, 'section', 'read');
+        $writer->assignRole('Writer');
 
         User::factory()->create(['email' => 'user@devsquad.com']);
     }

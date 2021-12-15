@@ -16,27 +16,23 @@
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
 
-                    @permissions('article:read')
+                    @can('read articles')
                         <x-jet-nav-link href="{{ route('articles.index') }}" :active="request()->routeIs('articles.*')">
                             {{ __('Articles') }}
                         </x-jet-nav-link>
-                    @endpermissions
+                    @endcan
                     
-                    @permissions('section:read')
+                    @can('read sections')
                         <x-jet-nav-link href="{{ route('sections.index') }}" :active="request()->routeIs('sections.*')">
                             {{ __('Sections') }}
                         </x-jet-nav-link>
-                    @endpermissions
+                    @endcan
 
-                    @roles('super-admin')
-                        <x-jet-nav-link href="#">
-                            {{ __('Roles') }}
+                    @role('Super Admin')
+                        <x-jet-nav-link href="{{ route('roles-and-permissions.index') }}" :active="request()->routeIs('roles-and-permissions.*')">
+                            {{ __('Roles & Permissions') }}
                         </x-jet-nav-link>
-
-                        <x-jet-nav-link href="#">
-                            {{ __('Permissions') }}
-                        </x-jet-nav-link>
-                    @endroles
+                    @endrole
                 </div>
             </div>
 
@@ -164,17 +160,23 @@
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
             
-            @permissions('article:read')
+            @can('read articles')
                 <x-jet-responsive-nav-link href="{{ route('articles.index') }}" :active="request()->routeIs('articles.*')">
                     {{ __('Articles') }}
                 </x-jet-responsive-nav-link>
-            @endpermissions
+            @endcan
 
-            @permissions('section:read')
+            @can('read sections')
                 <x-jet-responsive-nav-link href="{{ route('sections.index') }}" :active="request()->routeIs('sections.*')">
                     {{ __('Sections') }}
                 </x-jet-responsive-nav-link>
-            @endpermissions
+            @endcan
+
+            @role('Super Admin')
+                <x-jet-responsive-nav-link href="{{ route('roles-and-permissions.index') }}" :active="request()->routeIs('roles-and-permissions.*')">
+                    {{ __('Roles & Permissions') }}
+                </x-jet-responsive-nav-link>
+            @endrole
         </div>
 
         <!-- Responsive Settings Options -->

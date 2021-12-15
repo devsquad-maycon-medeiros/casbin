@@ -47,13 +47,13 @@
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                     <div class="flex divide-x-2">
-                                                        @permissions('section:update')
+                                                        @can('update sectiona')
                                                             <a href="{{ route('sections.edit', $section) }}" class="text-indigo-600 hover:text-indigo-900 p-2">Edit</a>
-                                                        @endpermissions
+                                                        @endcan
 
-                                                        @permissions('section:delete')
+                                                        @can('delete sectiona')
                                                             <a href="#" wire:click="remove({{ $section }})" class="text-indigo-600 hover:text-indigo-900 p-2">Remove</a>
-                                                        @endpermissions
+                                                        @endcan
                                                     </div>
                                                 </td>
                                             </tr>
