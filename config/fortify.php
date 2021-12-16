@@ -92,6 +92,7 @@ return [
 
     'middleware' => [
         'web',
+        'universal',
         InitializeTenancyByDomain::class,
     ],
 
